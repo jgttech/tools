@@ -33,11 +33,11 @@ Pick one of these methods for installing the tools.
 ##### *Option 1 - wget*
 
 ```bash
-URL="https://shorturl.at/gM2DX" DIR=".tools"; wget -qO- "$URL?$(date +%s)" | sh -s -- $DIR; unset URL DIR;
+URL="https://shorturl.at/gM2DX" DIR=".tools"; wget -qO- $URL | sh -s -- $DIR; unset URL DIR;
 ```
 
 ##### *Option 2 - curl*
 
 ```bash
-URL="https://shorturl.at/gM2DX" DIR=".tools"; curl -s "$URL?$(date +%s)" | sh -s -- $DIR; unset URL DIR;
+URL="https://shorturl.at/gM2DX" DIR=".tools"; curl -s $URL | sh -s -- $DIR; unset URL DIR;
 ```
