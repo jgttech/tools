@@ -27,20 +27,19 @@ go mod download
 # Build the tools.
 go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
 
-echo "\${HOME}/${BASE_DIR}/bin/local"
-
-# case `grep -Fq "" "$LIST" >/dev/null; echo $?` in
-#   0)
-#     # Code is found
-#     ${LOCAL_LINK} install --link
-#     ;;
-#   1)
-#     # Code if not found
-#     ${LOCAL_LINK} install --link
-#     ;;
-#   *)
-#     # Code if an error occurred
-#     ;;
-# esac
+case `grep -Fq "\${HOME}/${BASE_DIR}/bin/local" "${HOME}/.zshrc" >/dev/null; echo $?` in
+  0)
+    # Code is found
+    echo "FOUND"
+    ;;
+  1)
+    # Code if not found
+    echo "NOT FOUND"
+    ;;
+  *)
+    # Code if an error occurred
+    echo "ERROR"
+    ;;
+esac
 
 echo "Done"
