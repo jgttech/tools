@@ -6,6 +6,7 @@ BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
 LOCAL_PATH="${BASE_PATH}/bin/local"
 LOCAL_LINK="${LOCAL_PATH}/${LINK_NAME}"
+PROFILE_PATH="${HOME}/${PROFILE_FILE}"
 
 # Clone the repo using the GitHub CLI.
 gh repo clone jgttech/tools ${BASE_PATH}
@@ -33,7 +34,7 @@ function tools {
   ${LOCAL_LINK} $@
 }
 
-case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` in
+case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
   0)
     # Code is found
     echo "\n+------------------------------------------+"
@@ -45,19 +46,25 @@ case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` i
     ;;
   1)
     # Code if not found
-    timestamp=`date +%s`
+    unix_timestamp=`date +%s`
+    timestamp=`date`
 
-    m="# jgttech/tools\n"
-    m="${m}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
-    m="${m}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n"
-    m="${m}  tools sync\n"
-    m="${m}fi\n"
-    m="${m}\n$(cat ${HOME}/${PROFILE_FILE})"
+    link="# jgttech/tools (generated at ${timestamp})\n"
+    link="${link}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
+    link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n"
+    link="${link}  tools sync\n"
+    link="${link}fi\n"
+    link="${link}\n$(cat ${PROFILE_PATH})"
 
-    # echo "${m}" > "${HOME}/${PROFILE_FILE}"
-    echo "${m}"
+    backup="${PROFILE_FILE}.${unix_timestamp}.bak"
 
-    case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` in
+    echo "Creating profile backup here: \"\${HOME}/${backup}\""
+    cp ${PROFILE_PATH} ${backup}
+
+    echo "Updating profile to link tools"
+    echo "${m}" > ${PROFILE_PATH}
+
+    case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
       0)
         # Code is found
         echo "\n+------------------------------------------+"
