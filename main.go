@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"jgttech/tools/cmds/install"
+	"jgttech/tools/cmds/sync"
 	"jgttech/tools/cmds/version"
 	"log"
 	"os"
@@ -16,6 +17,7 @@ func main() {
 		Commands: []*cli.Command{
 			version.Command(),
 			install.Command(),
+			sync.Command(),
 		},
 	}
 
