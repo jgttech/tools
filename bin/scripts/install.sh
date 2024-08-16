@@ -6,6 +6,8 @@ CONF_FILE="pkg.sh"
 # Load the configuration into the installation.
 source "${BASE_PATH}/${CONF_FILE}"
 
+gh repo clone jgttech/tools ${HOME}/.tools
+
 # Build the tools.
 go build -o "${BASE_PATH}/bin/versions/${VERSION}/tools" "${BASE_PATH}/main.go"
 
