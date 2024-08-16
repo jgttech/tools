@@ -47,11 +47,11 @@ case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` i
     # Code if not found
     msg="# jgttech/tools\n"
     msg="${msg}export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n"
-    msg="${msg}if [ -d ${HOME}/.tools ]; then\n"
+    msg="${msg}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
     msg="${msg}  tools sync\n"
     msg="${msg}fi\n"
 
-    echo ${msg} &>> "${HOME}/${PROFILE_FILE}"
+    echo "${msg}" >> "${HOME}/${PROFILE_FILE}"
 
     case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` in
       0)
