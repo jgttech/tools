@@ -1,4 +1,4 @@
-package version
+package install
 
 import (
 	"context"
@@ -9,9 +9,9 @@ import (
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name: "version",
+		Name: "install",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			fmt.Println("VERSION")
+			fmt.Println("INSTALL")
 			return nil
 		},
 	}

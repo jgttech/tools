@@ -23,6 +23,6 @@ fi
 # Build the tools.
 go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
 
-${LOCAL_LINK}
+${LOCAL_LINK} install
 
 echo "Done"
