@@ -54,7 +54,7 @@ case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     link="${link}  # Add the symbolic link to the version binary to the shell PATH.\n"
     link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n\n"
     link="${link}  # Used to link any shell configuration(s).\n"
-    link="${link}  source \${HOME}/${BASE_DIR}/bin/scripts/zshrc.sh\n"
+    link="${link}  source \${HOME}/${BASE_DIR}/zshrc.sh\n"
     link="${link}fi\n"
     link="${link}\n$(cat ${PROFILE_PATH})"
 
