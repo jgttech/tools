@@ -1,5 +1,11 @@
 #!/usr/bin/env zsh
-source "${HOME}/.scripts/pkg.sh"
+BASE_DIR=".scripts"
+BASE_PATH="${HOME}/${BASE_DIR}"
+CONF_FILE="pkg.sh"
 
-echo "Hello world"
-echo "VERSION: ${VERSION}"
+source "${BASE_PATH}/${CONF_FILE}"
+
+cd ${BASE_PATH}
+go build -o "${BASE_PATH}/bin/${VERSION}/tools" "${BASE_PATH}/main.go"
+
+echo "Done"
