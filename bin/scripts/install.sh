@@ -10,6 +10,11 @@ BASE_DIR=$(trim $1)
 BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
 
+if [ -d ${BASE_PATH} ]; then
+  echo "Looks like this already exists: '${BASE_PATH}'"
+  exit
+fi
+
 # Clone the repo using the GitHub CLI.
 gh repo clone jgttech/tools ${BASE_PATH}
 
