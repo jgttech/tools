@@ -1,6 +1,14 @@
 #!/usr/bin/env zsh
+function trim {
+    local var="$*"
+    var="${var#"${var%%[![:space:]]*}"}"
+    var="${var%"${var##*[![:space:]]}"}"
+    printf '%s' "$var"
+}
 
-echo "ARG 0: $1"
+BASE_DIR=$(trim $1)
+
+echo "BASE_DIR: ${BASE_DIR}"
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
