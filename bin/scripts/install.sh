@@ -23,7 +23,6 @@ fi
 # Build the tools.
 go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
 
-# Make the symbolic link to the current installation version.
-# ln -s "${BASE_PATH}/bin/versions/${VERSION}/tools" "${BASE_PATH}/bin/local/tools"
+${LOCAL_LINK}
 
 echo "Done"
