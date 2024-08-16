@@ -17,16 +17,27 @@ This will download the repo to a specific location on your system (default is `$
 
 > **[WARNING]** <br /> This invokes a shell script for running the setup. You can review what the script does on GitHub. NEVER run a script blindly without making sure you trust it.
 
+---
+
+##### Variables
+
+- `URL`
+  - The URL to the shell file content. I used a short URL to keep things small.
+- `DIR`
+  - The name of the directory to install everything in, under the users `$HOME` path.
+
+---
+
 Pick one of these methods for installing the tools.
 
 ##### *Option 1 - wget*
 
 ```bash
-URL="https://shorturl.at/gM2DX" ARGS="foo bar"; wget -qO- "$URL?$(date +%s)" | sh -s -- $ARGS; unset URL ARGS;
+URL="https://shorturl.at/gM2DX" DIR=".tools"; wget -qO- "$URL?$(date +%s)" | sh -s -- $DIR; unset URL DIR;
 ```
 
 ##### *Option 2 - curl*
 
 ```bash
-URL="https://shorturl.at/gM2DX" ARGS="foo bar"; curl -s "$URL?$(date +%s)" | sh -s -- $ARGS; unset URL ARGS;
+URL="https://shorturl.at/gM2DX" DIR=".tools"; curl -s "$URL?$(date +%s)" | sh -s -- $DIR; unset URL DIR;
 ```
