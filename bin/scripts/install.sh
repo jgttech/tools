@@ -11,11 +11,7 @@ BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
 
 if [ -d ${BASE_PATH} ]; then
-  echo "Looks like this already exists: '${BASE_PATH}'\n"
-  echo "[NOTICE]"
-  echo "You can remove this directory to re-install the tools.\n"
-  echo "rm -rfv ${BASE_PATH}\n"
-  echo "Then run the install command again."
+  echo "\nLooks like this already exists: '${BASE_PATH}'\n"
   exit
 fi
 
