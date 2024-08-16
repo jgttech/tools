@@ -11,7 +11,11 @@ BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
 
 if [ -d ${BASE_PATH} ]; then
-  echo "Looks like this already exists: '${BASE_PATH}'"
+  echo "Looks like this already exists: '${BASE_PATH}'\n"
+  echo "[NOTICE]"
+  echo "You can remove this directory to re-install the tools.\n"
+  echo "rm -rfv ${BASE_PATH}\n"
+  echo "Then run the install command again."
   exit
 fi
 
@@ -25,8 +29,6 @@ source ${CONF_PATH}
 BIN_PATH="${BASE_PATH}/bin/versions/${VERSION}/tools"
 SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/bin/local"
 
-echo "BIN_PATH........: '$BIN_PATH'"
-echo "SEARCH_CRITERIA.: '$SEARCH_CRITERIA'"
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
