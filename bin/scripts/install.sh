@@ -49,10 +49,12 @@ case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     unix_timestamp=`date +%s`
     timestamp=`date`
 
-    link="# jgttech/tools (generated at ${timestamp})\n"
+    link="# jgttech/tools (generated on ${timestamp})\n"
     link="${link}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
-    link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n"
-    link="${link}  tools sync\n"
+    link="${link}  # Add the symbolic link to the version binary to the shell PATH.\n"
+    link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n\n"
+    link="${link}  # Used to link any shell configuration(s).\n"
+    link="${link}  source \${HOME}/${BASE_DIR}/bin/local/zshrc.sh\n"
     link="${link}fi\n"
     link="${link}\n$(cat ${PROFILE_PATH})"
 
