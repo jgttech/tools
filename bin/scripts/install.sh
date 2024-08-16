@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 
-echo "ARGS: $@"
+echo "ARG 0: $1"
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
