@@ -1,7 +1,6 @@
 #!/usr/bin/env zsh
 
-echo "URL: ${URL}"
-pwd
+echo "ARGS: $@"
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"

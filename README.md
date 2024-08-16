@@ -22,11 +22,11 @@ Pick one of these methods for installing the tools.
 ##### *Option 1 - wget*
 
 ```bash
-URL="https://shorturl.at/gM2DX"; wget -qO- "${URL}?$(date +%s)" | sh; unset URL;
+URL="https://shorturl.at/gM2DX" ARGS="foo bar"; wget -qO- "$URL?$(date +%s)" | sh -s -- $ARGS; unset URL ARGS;
 ```
 
 ##### *Option 2 - curl*
 
 ```bash
-URL="https://shorturl.at/gM2DX"; curl -s "${URL}?$(date +%s)" | sh; unset URL;
+URL="https://shorturl.at/gM2DX" ARGS="foo bar"; curl -s "$URL?$(date +%s)" | sh -s -- $ARGS; unset URL ARGS;
 ```
