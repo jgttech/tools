@@ -13,6 +13,6 @@ gh repo clone jgttech/tools ${BASE_PATH}
 go build -o "${BASE_PATH}/bin/versions/${VERSION}/tools" "${BASE_PATH}/main.go"
 
 # Make the symbolic link to the current installation version.
-ln -s "${BASE_PATH}/bin/versions/${VERSION}/tools" "${BASE_PATH}/bin/local/tools"
+# ln -s "${BASE_PATH}/bin/versions/${VERSION}/tools" "${BASE_PATH}/bin/local/tools"
 
 echo "Done"
