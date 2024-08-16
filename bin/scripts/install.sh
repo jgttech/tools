@@ -46,8 +46,8 @@ case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` i
   1)
     # Code if not found
     msg="# jgttech/tools\n"
-    msg="${msg}export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n"
     msg="${msg}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
+    msg="${msg}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n"
     msg="${msg}  tools sync\n"
     msg="${msg}fi\n"
 
