@@ -20,6 +20,10 @@ if [ ! -d ${LOCAL_PATH} ]; then
   ln -s ${BIN_PATH} ${LOCAL_LINK}
 fi
 
+# Download the modules
+cd ${BASE_PATH}
+go mod download
+
 # Build the tools.
 go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
 
