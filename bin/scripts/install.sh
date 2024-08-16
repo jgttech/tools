@@ -7,8 +7,21 @@ function trim {
 }
 
 BASE_DIR=$(trim $1)
+BASE_PATH="${HOME}/${BASE_DIR}"
+CONF_PATH="${BASE_PATH}/pkg.sh"
 
-echo "BASE_DIR: ${BASE_DIR}"
+# Clone the repo using the GitHub CLI.
+gh repo clone jgttech/tools ${BASE_PATH}
+
+# Load the configuration into the installation.
+source ${CONF_PATH}
+
+# Configuration-based envronment configuration.
+BIN_PATH="${BASE_PATH}/bin/versions/${VERSION}/tools"
+SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/bin/local"
+
+echo "BIN_PATH........: '$BIN_PATH'"
+echo "SEARCH_CRITERIA.: '$SEARCH_CRITERIA'"
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
