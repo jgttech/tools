@@ -1,4 +1,5 @@
 #!/usr/bin/env zsh
+PROFILE_FILE=".zshrc"
 BASE_DIR=".tools"
 LINK_NAME="tools"
 BASE_PATH="${HOME}/${BASE_DIR}"
@@ -14,6 +15,7 @@ source ${CONF_PATH}
 
 # Configuration-based envronment configuration.
 BIN_PATH="${BASE_PATH}/bin/versions/${VERSION}/tools"
+GREP_CRITERIA="\${HOME}/${BASE_DIR}/bin/local"
 
 if [ ! -d ${LOCAL_PATH} ]; then
   mkdir ${LOCAL_PATH}
@@ -27,18 +29,59 @@ go mod download
 # Build the tools.
 go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
 
-case `grep -Fq "\${HOME}/${BASE_DIR}/bin/local" "${HOME}/.zshrc" >/dev/null; echo $?` in
+function tools {
+  ${LOCAL_LINK} $@
+}
+
+case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` in
   0)
     # Code is found
-    echo "FOUND"
+    echo "\n+------------------------------------------+"
+    echo "| (i) INFO                                 |"
+    echo "|                                          |"
+    echo "| Looks like you already have the tools    |"
+    echo "| linked in your \${HOME}/.zshrc config.    |"
+    echo "+------------------------------------------+\n"
     ;;
   1)
     # Code if not found
-    echo "NOT FOUND"
+    echo "# jgttech/tools\nexport PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"" &> "${HOME}/${PROFILE_FILE}"
+
+    case `grep -Fq ${GREP_CRITERIA} "${HOME}/${PROFILE_FILE}" >/dev/null; echo $?` in
+      0)
+        # Code is found
+        echo "\n+------------------------------------------+"
+        echo "| (+) SUCCESS                              |"
+        echo "|                                          |"
+        echo "| Sucessfully linked tools to your config. |"
+        echo "+------------------------------------------+\n"
+        ;;
+      1)
+        # Code is not found
+        echo "\n+------------------------------------------+"
+        echo "| (-) FAILURE                              |"
+        echo "|                                          |"
+        echo "| Failed to link tools to your config.     |"
+        echo "+------------------------------------------+\n"
+        ;;
+      *)
+        echo "\n+------------------------------------------+"
+        echo "| {!} ERROR (2)                            |"
+        echo "|                                          |"
+        echo "| Oops, looks like something went wrong.   |"
+        echo "| Failed to link and/or install the tools. |"
+        echo "+------------------------------------------+\n"
+        ;;
+    esac
     ;;
   *)
     # Code if an error occurred
-    echo "ERROR"
+    echo "\n+------------------------------------------+"
+    echo "| {!} ERROR (1)                            |"
+    echo "|                                          |"
+    echo "| Oops, looks like something went wrong.   |"
+    echo "| Failed to link and/or install the tools. |"
+    echo "+------------------------------------------+\n"
     ;;
 esac
 
