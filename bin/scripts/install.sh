@@ -27,6 +27,20 @@ go mod download
 # Build the tools.
 go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
 
-${LOCAL_LINK} install
+echo "\${HOME}/${BASE_DIR}/bin/local"
+
+# case `grep -Fq "" "$LIST" >/dev/null; echo $?` in
+#   0)
+#     # Code is found
+#     ${LOCAL_LINK} install --link
+#     ;;
+#   1)
+#     # Code if not found
+#     ${LOCAL_LINK} install --link
+#     ;;
+#   *)
+#     # Code if an error occurred
+#     ;;
+# esac
 
 echo "Done"
