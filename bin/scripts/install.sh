@@ -1,12 +1,13 @@
 #!/usr/bin/env zsh
-BASE_DIR=".scripts"
+BASE_DIR=".tools"
 BASE_PATH="${HOME}/${BASE_DIR}"
-CONF_FILE="pkg.sh"
+CONF_PATH="${BASE_PATH}/pkg.sh"
 
 # Load the configuration into the installation.
-source "${BASE_PATH}/${CONF_FILE}"
+source ${CONF_PATH}
 
-gh repo clone jgttech/tools ${HOME}/.tools
+# Clone the repo using the GitHub CLI.
+gh repo clone jgttech/tools ${BASE_PATH}
 
 # Build the tools.
 go build -o "${BASE_PATH}/bin/versions/${VERSION}/tools" "${BASE_PATH}/main.go"
