@@ -1,6 +1,6 @@
 # Used to configure the build and installation process.
 VERSION="1.0.0"
+NAME="tools"
 PROFILE=".zshrc"
-LINK_NAME="tools"
-LOCAL_PATH="bin/local"
-VERSIONS_PATH="bin/versions"
+LOCAL_DIR="bin/local"
+VERSIONS_DIR="bin/versions"

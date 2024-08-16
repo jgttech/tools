@@ -10,8 +10,10 @@ BASE_DIR=$(trim $1)
 BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
 
+# Tools installation check
 if [ -d ${BASE_PATH} ]; then
-  echo "\nLooks like this already exists: '${BASE_PATH}'\n"
+  echo "\nLooks like this already exists: '${BASE_PATH}'"
+  echo "You can delete this directory to re-install the tools."
   exit
 fi
 
@@ -21,10 +23,15 @@ gh repo clone jgttech/tools ${BASE_PATH}
 # Load the configuration into the installation.
 source ${CONF_PATH}
 
-# Configuration-based envronment configuration.
-BIN_PATH="${BASE_PATH}/bin/versions/${VERSION}/tools"
-SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/bin/local"
+# Setup configuration
+LOCAL_PATH="${BASE_PATH}/${LOCAL_DIR}"
+BIN_PATH="${BASE_PATH}/${VERSIONS_DIR}/${VERSION}/${NAME}"
+SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/${LOCAL_DIR}"
 
+if [ ! -d ${LOCAL_PATH} ]; then
+  mkdir ${LOCAL_PATH}
+  ln -s ${BIN_PATH} ${LOCAL_LINK}
+fi
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
