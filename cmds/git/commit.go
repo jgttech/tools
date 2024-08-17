@@ -9,8 +9,7 @@ import (
 
 func commit() *cli.Command {
 	return &cli.Command{
-		Name:     "commit",
-		Category: "git",
+		Name: "commit",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			fmt.Println("GIT COMMIT")
 			return nil

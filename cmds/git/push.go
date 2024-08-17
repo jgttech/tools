@@ -9,8 +9,7 @@ import (
 
 func push() *cli.Command {
 	return &cli.Command{
-		Name:     "push",
-		Category: "git",
+		Name: "push",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			fmt.Println("GIT PUSH")
 			return nil
