@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/sync"
 	"jgttech/tools/cmds/version"
 	"log"
@@ -16,6 +17,7 @@ func main() {
 		Commands: []*cli.Command{
 			version.Command(),
 			sync.Command(),
+			git.Command(),
 		},
 	}
 
