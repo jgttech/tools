@@ -25,6 +25,7 @@ source ${CONF_PATH}
 
 # Setup configuration
 LOCAL_PATH="${BASE_PATH}/${LOCAL_DIR}"
+LOCAL_LINK="${LOCAL_PATH}/${NAME}"
 BIN_PATH="${BASE_PATH}/${VERSIONS_DIR}/${VERSION}/${NAME}"
 SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/${LOCAL_DIR}"
 
@@ -32,6 +33,19 @@ if [ ! -d ${LOCAL_PATH} ]; then
   mkdir ${LOCAL_PATH}
   ln -s ${BIN_PATH} ${LOCAL_LINK}
 fi
+
+# Download the modules
+cd ${BASE_PATH}
+go mod download
+
+# Build the tools.
+go build -o ${BIN_PATH} "${BASE_PATH}/main.go"
+
+function tools {
+  ${LOCAL_LINK} $@
+}
+
+echo "LOCAL_LINK: ${LOCAL_LINK}"
 
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
