@@ -77,7 +77,7 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     echo "Updating profile to link tools"
     echo "${link}" > ${PROFILE_PATH}
 
-    case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
+    case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
       0)
         # Code is found
         echo "\n| (+) SUCCESS"
