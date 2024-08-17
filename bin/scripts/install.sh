@@ -28,6 +28,7 @@ LOCAL_PATH="${BASE_PATH}/${LOCAL_DIR}"
 LOCAL_LINK="${LOCAL_PATH}/${NAME}"
 BIN_PATH="${BASE_PATH}/${VERSIONS_DIR}/${VERSION}/${NAME}"
 SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/${LOCAL_DIR}"
+PROFILE_PATH="${HOME}/${PROFILE}"
 
 if [ ! -d ${LOCAL_PATH} ]; then
   mkdir ${LOCAL_PATH}
@@ -45,8 +46,69 @@ function tools {
   ${LOCAL_LINK} $@
 }
 
-echo "LOCAL_LINK: ${LOCAL_LINK}"
+# Check the
+case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
+  0)
+    # Code is found
+    echo "| (i) INFO|"
+    echo "|"
+    echo "| Looks like you already have the tools"
+    echo "| linked in your \${HOME}/${PROFILE} config."
+    ;;
+  1)
+    # Code if not found
+    unix_timestamp=`date +%s`
+    timestamp=`date`
 
+    link="# jgttech/tools (generated on ${timestamp})\n"
+    link="${link}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
+    link="${link}  # Add the symbolic link to the version binary to the shell PATH.\n"
+    link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n\n"
+    link="${link}  # Used to link any shell configuration(s).\n"
+    link="${link}  source \${HOME}/${BASE_DIR}/zshrc.sh\n"
+    link="${link}fi\n"
+    link="${link}\n$(cat ${PROFILE_PATH})"
+
+    backup="${PROFILE}.${unix_timestamp}.bak"
+
+    echo "Creating profile backup here: \"\${HOME}/${backup}\""
+    cp ${PROFILE_PATH} ${backup}
+
+    echo "Updating profile to link tools"
+    echo "${m}" > ${PROFILE_PATH}
+
+    case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
+      0)
+        # Code is found
+        echo "| (+) SUCCESS"
+        echo "|"
+        echo "| Sucessfully linked tools to your config."
+        ;;
+      1)
+        # Code is not found
+        echo "| {!} FAILURE"
+        echo "|"
+        echo "| Failed to link tools to your config."
+        ;;
+      *)
+        # Code if an error occurred
+        echo "| /!\\ ERROR"
+        echo "|"
+        echo "| Oops, looks like something went wrong."
+        echo "| Failed to link and/or install the tools."
+        ;;
+    esac
+    ;;
+  *)
+    # Code if an error occurred
+    echo "| /!\\ ERROR"
+    echo "|"
+    echo "| Oops, looks like something went wrong."
+    echo "| Failed to link and/or install the tools."
+    ;;
+esac
+
+echo "Done"
 # PROFILE_FILE=".zshrc"
 # BASE_DIR=".tools"
 # LINK_NAME="tools"
