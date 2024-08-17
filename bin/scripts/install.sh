@@ -50,7 +50,7 @@ function tools {
 case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
   0)
     # Code is found
-    echo "| (i) INFO|"
+    echo "\n| (i) INFO|"
     echo "|"
     echo "| Looks like you already have the tools"
     echo "| linked in your \${HOME}/${PROFILE} config."
@@ -69,7 +69,7 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     link="${link}fi\n"
     link="${link}\n$(cat ${PROFILE_PATH})"
 
-    backup="${PROFILE}.${unix_timestamp}.bak"
+    backup="${HOME}/${PROFILE}.${unix_timestamp}.bak"
 
     echo "Creating profile backup here: \"\${HOME}/${backup}\""
     cp ${PROFILE_PATH} ${backup}
@@ -80,19 +80,19 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     case `grep -Fq ${GREP_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
       0)
         # Code is found
-        echo "| (+) SUCCESS"
+        echo "\n| (+) SUCCESS"
         echo "|"
         echo "| Sucessfully linked tools to your config."
         ;;
       1)
         # Code is not found
-        echo "| {!} FAILURE"
+        echo "\n| {!} FAILURE"
         echo "|"
         echo "| Failed to link tools to your config."
         ;;
       *)
         # Code if an error occurred
-        echo "| /!\\ ERROR"
+        echo "\n| /!\\ ERROR"
         echo "|"
         echo "| Oops, looks like something went wrong."
         echo "| Failed to link and/or install the tools."
@@ -101,7 +101,7 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     ;;
   *)
     # Code if an error occurred
-    echo "| /!\\ ERROR"
+    echo "\n| /!\\ ERROR"
     echo "|"
     echo "| Oops, looks like something went wrong."
     echo "| Failed to link and/or install the tools."
