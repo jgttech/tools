@@ -82,7 +82,11 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
         # Code is found
         echo "\n| (+) SUCCESS"
         echo "|"
-        echo "| Sucessfully linked tools to your config."
+        echo "| Sucessfully linked tools to your config.\n"
+
+        echo "Closing the terminal and restarting is should"
+        echo "successfully, allow you to run 'tools' and see"
+        echo "the CLI help information."
         ;;
       1)
         # Code is not found
