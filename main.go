@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"jgttech/tools/cmds/edit"
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/sync"
 	"jgttech/tools/cmds/version"
@@ -18,6 +19,7 @@ func main() {
 			version.Command(),
 			sync.Command(),
 			git.Command(),
+			edit.Command(),
 		},
 	}
 
