@@ -38,22 +38,12 @@ BIN_PATH="${OUT_PATH}/${VERSIONS_DIR}/${VERSION}/${NAME}"
 SEARCH_CRITERIA="\${HOME}/${BASE_DIR}/${OUT_DIR}/${LOCAL_DIR}"
 PROFILE_PATH="${HOME}/${PROFILE}"
 
-echo "BASE_DIR........: ${BASE_DIR}"
-echo "BASE_PATH.......: ${BASE_PATH}"
-echo "CONF_PATH.......: ${CONF_PATH}"
-echo "LOCAL_PATH......: ${LOCAL_PATH}"
-echo "LOCAL_LINK......: ${LOCAL_LINK}"
-echo "BIN_PATH........: ${BIN_PATH}"
-echo "SEARCH_CRITERIA.: ${SEARCH_CRITERIA}"
-echo "PROFILE_PATH....: ${PROFILE_PATH}"
-exit
-
 if [ ! -d ${LOCAL_PATH} ]; then
   mkdir ${LOCAL_PATH}
   ln -s ${BIN_PATH} ${LOCAL_LINK}
 fi
 
-GO_ENV_DIR="${BIN_DIR}/env"
+GO_ENV_DIR="${OUT_PATH}/env"
 GO_ENV_FILE="${GO_ENV_DIR}/env.go"
 
 if [ ! -d ${GO_ENV_DIR} ]; then
