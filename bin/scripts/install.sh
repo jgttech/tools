@@ -9,8 +9,6 @@ function trim {
 BASE_DIR=$(trim $1)
 BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
-GO_ENV="${BASE_PATH}/env"
-GO_ENV_FILE="${GO_ENV}/env.go"
 
 # Tools installation check
 if [ -d ${BASE_PATH} ]; then
@@ -18,6 +16,13 @@ if [ -d ${BASE_PATH} ]; then
   echo "You can delete this directory to re-install the tools."
   exit
 fi
+
+GO_ENV="${BASE_PATH}/env"
+GO_ENV_FILE="${GO_ENV}/env.go"
+
+echo ${GO_ENV}
+echo ${GO_ENV_FILE}
+exit
 
 if [ ! -d ${GO_ENV} ]; then
   mkdir ${GO_ENV}
