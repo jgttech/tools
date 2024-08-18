@@ -3,18 +3,18 @@ package git
 import (
 	"context"
 	"fmt"
-	"jgttech/tools/sys"
+	"strings"
 	"time"
 
 	"github.com/urfave/cli/v3"
+	"jgttech/tools/sys"
 )
 
 func wip() *cli.Command {
 	var signed bool
 
 	return &cli.Command{
-		Name:            "wip",
-		SkipFlagParsing: true,
+		Name: "wip",
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
 				Name:        "signed",
@@ -24,14 +24,23 @@ func wip() *cli.Command {
 		},
 		Action: func(ctx context.Context, _ *cli.Command) error {
 			var signedFlag string
+			var commitMessage []string
 
 			if signed {
 				signedFlag = "-S"
 			}
 
 			timestamp := time.Now()
+			commitTokens := []string{"git commit", signedFlag, fmt.Sprintf(`-m "WIP %s"`, timestamp)}
+
+			for _, token := range commitTokens {
+				if strings.TrimSpace(token) != "" {
+					commitMessage = append(commitMessage, token)
+				}
+			}
+
 			add := sys.StdCmd(`git add .`)
-			commit := sys.StdCmd(fmt.Sprintf(`git commit %s "WIP %s"`, signedFlag, timestamp))
+			commit := sys.StdCmd(strings.Join(commitMessage, " "))
 			push := sys.StdCmd(`git push`)
 
 			err := sys.Catch(add.Run())
