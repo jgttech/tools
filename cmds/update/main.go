@@ -13,7 +13,7 @@ import (
 
 func catch(err error) error {
 	if err != nil {
-		fmt.Printf(err.Error())
+		fmt.Printf(err.Error() + "\n")
 	}
 
 	return nil
