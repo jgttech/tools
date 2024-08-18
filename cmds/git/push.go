@@ -13,6 +13,7 @@ import (
 func push() *cli.Command {
 	return &cli.Command{
 		Name:            "push",
+		Usage:           "A passthrough for 'git push'.",
 		SkipFlagParsing: true,
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			argv := strings.Join(os.Args[3:], " ")
