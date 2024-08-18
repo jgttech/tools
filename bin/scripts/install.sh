@@ -17,12 +17,14 @@ if [ -d ${BASE_PATH} ]; then
   exit
 fi
 
+# Clone the repo using the GitHub CLI.
+gh repo clone jgttech/tools ${BASE_PATH}
+
+# Load the configuration into the installation.
+source ${CONF_PATH}
+
 GO_ENV="${BASE_PATH}/env"
 GO_ENV_FILE="${GO_ENV}/env.go"
-
-echo ${GO_ENV}
-echo ${GO_ENV_FILE}
-exit
 
 if [ ! -d ${GO_ENV} ]; then
   mkdir ${GO_ENV}
@@ -41,12 +43,6 @@ if [ ! -d ${GO_ENV} ]; then
 
   echo ${env} > ${GO_ENV_FILE}
 fi
-
-# Clone the repo using the GitHub CLI.
-gh repo clone jgttech/tools ${BASE_PATH}
-
-# Load the configuration into the installation.
-source ${CONF_PATH}
 
 # Setup configuration
 LOCAL_PATH="${BASE_PATH}/${LOCAL_DIR}"
