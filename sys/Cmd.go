@@ -6,10 +6,14 @@ import (
 )
 
 func Cmd(cmd string) *exec.Cmd {
-	args := strings.Split(cmd, " ")
-	binary := args[0]
-	argv := args[1:]
-	command := exec.Command(binary, argv...)
+	idx := strings.Index(cmd, " ")
 
-	return command
+	if idx == -1 {
+		return nil
+	}
+
+	bin := cmd[:idx]
+	argv := cmd[idx+1:]
+
+	return exec.Command(bin, argv)
 }
