@@ -6,7 +6,6 @@ import (
 	"jgttech/tools/cmds/edit"
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/sync"
-	"jgttech/tools/cmds/test"
 	"jgttech/tools/cmds/update"
 	"jgttech/tools/cmds/version"
 	"log"
@@ -23,7 +22,6 @@ func main() {
 			edit.Command(),
 			git.Command(),
 			sync.Command(),
-			test.Command(),
 			update.Command(),
 			version.Command(),
 		},
