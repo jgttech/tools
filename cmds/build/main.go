@@ -21,8 +21,6 @@ func Command() *cli.Command {
 			buildDir, err := path.Join(env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
 			sys.Panic(err)
 
-			fmt.Println(fmt.Sprintf("go build -o %s", buildDir))
-
 			build := sys.StdCmd(fmt.Sprintf("go build -o %s", buildDir))
 			build.Dir = pwd
 

@@ -13,7 +13,10 @@ func Cmd(cmd string) *exec.Cmd {
 	}
 
 	bin := cmd[:idx]
+	bin = strings.TrimSpace(bin)
+
 	argv := cmd[idx+1:]
+	argv = strings.TrimSpace(argv)
 
 	return exec.Command(bin, argv)
 }
