@@ -26,6 +26,10 @@ source ${CONF_PATH}
 GO_ENV="${BASE_PATH}/env"
 GO_ENV_FILE="${GO_ENV}/env.go"
 
+echo "GO_ENV......: ${GO_ENV}"
+echo "GO_ENV_FILE.: ${GO_ENV_FILE}"
+exit
+
 if [ ! -d ${GO_ENV} ]; then
   mkdir ${GO_ENV}
   touch ${GO_ENV_FILE}
