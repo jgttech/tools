@@ -24,11 +24,11 @@ gh repo clone jgttech/tools ${BASE_PATH}
 source ${CONF_PATH}
 
 # The output directory for all the generated code.
-OUT_PATH="${BASE_PATH}/.bin"
+OUT_PATH="${BASE_PATH}/${OUT_DIR}"
 
 # Create the output directory, if it does not exist.
-if [ ! -d ${OUT_DIR} ]; then
-  mkdir ${OUT_DIR}
+if [ ! -d ${OUT_PATH} ]; then
+  mkdir ${OUT_PATH}
 fi
 
 # Setup configuration
