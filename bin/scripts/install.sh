@@ -9,12 +9,32 @@ function trim {
 BASE_DIR=$(trim $1)
 BASE_PATH="${HOME}/${BASE_DIR}"
 CONF_PATH="${BASE_PATH}/pkg.sh"
+GO_ENV="${BASE_PATH}/env"
+GO_ENV_FILE="${GO_ENV}/env.go"
 
 # Tools installation check
 if [ -d ${BASE_PATH} ]; then
   echo "\nLooks like this already exists: '${BASE_PATH}'"
   echo "You can delete this directory to re-install the tools."
   exit
+fi
+
+if [ ! -d ${GO_ENV} ]; then
+  mkdir ${GO_ENV}
+  touch ${GO_ENV_FILE}
+
+  # Generates an "env" module in Go that gets
+  # compiled into the binary and used to know
+  # what the installation environment was/is.
+  env="package env\n\n"
+  env="${env}const (\n"
+  env="${env}  BASE_DIR = \"${BASE_DIR}\"\n"
+  env="${env}  VERSION = \"${VERSION}\"\n"
+  env="${env}  NAME = \"${NAME}\"\n"
+  env="${env}  PROFILE = \"${PROFILE}\"\n"
+  env="${env})\n"
+
+  echo ${env} > ${GO_ENV_FILE}
 fi
 
 # Clone the repo using the GitHub CLI.
