@@ -123,9 +123,11 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
         ;;
       1)
         # Code is not found
-        echo "\n| {!} FAILURE"
+        echo "\n| {!} WARNING"
         echo "|"
         echo "| Failed to link tools to your config."
+        echo "| You might already have a tools config"
+        echo "| already setup."
         ;;
       *)
         # Code if an error occurred
