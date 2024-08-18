@@ -11,12 +11,11 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-// go build -o $HOME/.tools/.bin/versions/1.0.0/tools
 func Command() *cli.Command {
 	return &cli.Command{
 		Name: "build",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			_, err := path.Join()
+			pwd, err := path.Join()
 			sys.Panic(err)
 
 			buildDir, err := path.Join(env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
@@ -24,9 +23,13 @@ func Command() *cli.Command {
 
 			fmt.Println(fmt.Sprintf("go build -o %s", buildDir))
 
-			// build := sys.StdCmd(fmt.Sprintf("go build -o %s", buildDir))
-			// build.Dir = pwd
-			//
+			build := sys.StdCmd(fmt.Sprintf("go build -o %s", buildDir))
+			build.Dir = pwd
+
+			if err := build.Run(); err != nil {
+				sys.Panic(err)
+			}
+
 			return nil
 		},
 	}
