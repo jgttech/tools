@@ -64,9 +64,6 @@ if [ ! -d ${GO_ENV_DIR} ]; then
   echo "${env}" > ${GO_ENV_FILE}
 fi
 
-echo "CHECK"
-exit
-
 # Download the modules
 cd ${BASE_PATH}
 go mod download
