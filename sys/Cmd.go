@@ -6,17 +6,34 @@ import (
 )
 
 func Cmd(cmd string) *exec.Cmd {
-	idx := strings.Index(cmd, " ")
+	var args []string
+	var builder strings.Builder
+	var inSingle, inDouble, inBacktick bool
 
-	if idx == -1 {
-		return nil
+	for _, ch := range cmd {
+		switch {
+		case ch == '\'' && !inDouble && !inBacktick:
+			inSingle = !inSingle
+			builder.WriteRune(ch)
+		case ch == '"' && !inSingle && !inBacktick:
+			inDouble = !inDouble
+			builder.WriteRune(ch)
+		case ch == '`' && !inSingle && !inDouble:
+			inBacktick = !inBacktick
+			builder.WriteRune(ch)
+		case ch == ' ' && !inSingle && !inDouble && !inBacktick:
+			if builder.Len() > 0 {
+				args = append(args, builder.String())
+				builder.Reset()
+			}
+		default:
+			builder.WriteRune(ch)
+		}
 	}
 
-	bin := cmd[:idx]
-	bin = strings.TrimSpace(bin)
+	if builder.Len() > 0 {
+		args = append(args, builder.String())
+	}
 
-	argv := cmd[idx+1:]
-	argv = strings.TrimSpace(argv)
-
-	return exec.Command(bin, argv)
+	return exec.Command(args[0], args[1:]...)
 }

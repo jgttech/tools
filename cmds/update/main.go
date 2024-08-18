@@ -3,7 +3,6 @@ package update
 import (
 	"context"
 	"fmt"
-	"os/exec"
 	"strconv"
 	"time"
 
@@ -13,18 +12,6 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-func runFromPath(bin string, wd string) func(cmd string) *exec.Cmd {
-	return func(args string) *exec.Cmd {
-		exe := fmt.Sprintf(`%s %s`, bin, args)
-		// fmt.Printf(`COMMAND: [%s]\n`, exe)
-
-		cmd := sys.StdCmd(exe)
-		cmd.Dir = wd
-
-		return cmd
-	}
-}
-
 func Command() *cli.Command {
 	return &cli.Command{
 		Name: "update",
@@ -33,10 +20,14 @@ func Command() *cli.Command {
 			pwd, err := path.Join()
 			sys.Panic(err)
 
-			git := runFromPath("git", pwd)
-			add := git(`add .`)
-			commit := git(fmt.Sprintf(`commit -m "WIP %s"`, timestamp))
-			push := git(`push`)
+			add := sys.StdCmd(`git add .`)
+			add.Dir = pwd
+
+			commit := sys.StdCmd(fmt.Sprintf(`git commit -m "WIP %s"`, timestamp))
+			commit.Dir = pwd
+
+			push := sys.StdCmd(`git push`)
+			push.Dir = pwd
 
 			err = add.Run()
 			sys.Panic(err)
