@@ -33,11 +33,11 @@ Pick one of these methods for installing the tools.
 ##### *Option 1 - wget*
 
 ```bash
-URL="https://tinyurl.com/jgttech" DIR=".tools"; wget -qO- $URL | sh -s -- $DIR;
+URL="https://tinyurl.com/jgttech" DIR=".tools"; wget -qO- $URL | zsh -s -- $DIR;
 ```
 
 ##### *Option 2 - curl*
 
 ```bash
-URL="https://tinyurl.com/jgttech" DIR=".tools"; curl -s $URL | sh -s -- $DIR;
+URL="https://tinyurl.com/jgttech" DIR=".tools"; curl -s $URL | zsh -s -- $DIR;
 ```
