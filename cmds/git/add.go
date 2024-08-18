@@ -3,20 +3,23 @@ package git
 import (
 	"context"
 	"fmt"
-	"strings"
-
 	"jgttech/tools/sys"
+	"os"
+	"strings"
 
 	"github.com/urfave/cli/v3"
 )
 
 func add() *cli.Command {
 	return &cli.Command{
-		Name: "add",
-		Action: func(ctx context.Context, cmd *cli.Command) error {
-			args := cmd.Args().Slice()
-			command := sys.StdCmd(fmt.Sprintf("git add %s", strings.Join(args, " ")))
-			err := command.Run()
+		Name:            "add",
+		Usage:           "A passthrough for 'git add'.",
+		SkipFlagParsing: true,
+		Action: func(ctx context.Context, _ *cli.Command) error {
+			argv := strings.Join(os.Args[3:], " ")
+			add := strings.TrimSpace(fmt.Sprintf(`git add %s`, argv))
+			cmd := sys.StdCmd(add)
+			err := cmd.Run()
 
 			return err
 		},

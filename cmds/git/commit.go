@@ -4,42 +4,20 @@ import (
 	"context"
 	"fmt"
 	"jgttech/tools/sys"
+	"os"
 	"strings"
 
 	"github.com/urfave/cli/v3"
 )
 
 func commit() *cli.Command {
-	var msg string
-	var sign bool
-
 	return &cli.Command{
-		Name: "commit",
-		Flags: []cli.Flag{
-			&cli.StringFlag{
-				Name:        "message",
-				Aliases:     []string{"m"},
-				Destination: &msg,
-				Required:    true,
-			},
-			&cli.BoolFlag{
-				Name:        "sign",
-				Aliases:     []string{"S"},
-				Destination: &sign,
-			},
-		},
+		Name:            "commit",
+		SkipFlagParsing: true,
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			commit := "git commit"
-
-			if msg != "" {
-				commit += fmt.Sprintf(` -m "%s"`, msg)
-			}
-
-			if sign {
-				commit += " -S"
-			}
-
-			command := sys.StdCmd(strings.TrimSpace(commit))
+			argv := strings.Join(os.Args[3:], " ")
+			commit := strings.TrimSpace(fmt.Sprintf(`git commit %s`, argv))
+			command := sys.StdCmd(commit)
 			err := command.Run()
 
 			return err

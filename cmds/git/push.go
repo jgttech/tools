@@ -2,32 +2,22 @@ package git
 
 import (
 	"context"
+	"fmt"
 	"jgttech/tools/sys"
+	"os"
 	"strings"
 
 	"github.com/urfave/cli/v3"
 )
 
 func push() *cli.Command {
-	var force bool
-
 	return &cli.Command{
-		Name: "push",
-		Flags: []cli.Flag{
-			&cli.BoolFlag{
-				Name:        "force",
-				Aliases:     []string{"f"},
-				Destination: &force,
-			},
-		},
+		Name:            "push",
+		SkipFlagParsing: true,
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			push := "git push"
-
-			if force {
-				push += " -f"
-			}
-
-			command := sys.StdCmd(strings.TrimSpace(push))
+			argv := strings.Join(os.Args[3:], " ")
+			push := strings.TrimSpace(fmt.Sprintf(`git push %s`, argv))
+			command := sys.StdCmd(push)
 			err := command.Run()
 
 			return err
