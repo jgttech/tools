@@ -32,16 +32,14 @@ func commit() *cli.Command {
 			commit := "git commit"
 
 			if msg != "" {
-				commit = commit + fmt.Sprintf(` -m "%s"`, msg)
+				commit += fmt.Sprintf(` -m "%s"`, msg)
 			}
 
 			if sign {
-				commit = commit + " -S"
+				commit += " -S"
 			}
 
-			fmt.Println(strings.TrimSpace(commit))
-
-			command := sys.StdCmd(commit)
+			command := sys.StdCmd(strings.TrimSpace(commit))
 			err := command.Run()
 
 			return err
