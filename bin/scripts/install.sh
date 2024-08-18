@@ -145,4 +145,5 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     ;;
 esac
 
+source ${HOME}/${PROFILE}
 echo "\nDone"
