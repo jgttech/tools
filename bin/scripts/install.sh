@@ -23,30 +23,30 @@ gh repo clone jgttech/tools ${BASE_PATH}
 # Load the configuration into the installation.
 source ${CONF_PATH}
 
-GO_ENV="${BASE_PATH}/env"
-GO_ENV_FILE="${GO_ENV}/env.go"
-
-echo "GO_ENV......: ${GO_ENV}"
-echo "GO_ENV_FILE.: ${GO_ENV_FILE}"
-exit
-
-if [ ! -d ${GO_ENV} ]; then
-  mkdir ${GO_ENV}
-  touch ${GO_ENV_FILE}
-
-  # Generates an "env" module in Go that gets
-  # compiled into the binary and used to know
-  # what the installation environment was/is.
-  env="package env\n\n"
-  env="${env}const (\n"
-  env="${env}  BASE_DIR = \"${BASE_DIR}\"\n"
-  env="${env}  VERSION = \"${VERSION}\"\n"
-  env="${env}  NAME = \"${NAME}\"\n"
-  env="${env}  PROFILE = \"${PROFILE}\"\n"
-  env="${env})\n"
-
-  echo ${env} > ${GO_ENV_FILE}
-fi
+# GO_ENV="${BASE_PATH}/env"
+# GO_ENV_FILE="${GO_ENV}/env.go"
+#
+# echo "GO_ENV......: ${GO_ENV}"
+# echo "GO_ENV_FILE.: ${GO_ENV_FILE}"
+# exit
+#
+# if [ ! -d ${GO_ENV} ]; then
+#   mkdir ${GO_ENV}
+#   touch ${GO_ENV_FILE}
+#
+#   # Generates an "env" module in Go that gets
+#   # compiled into the binary and used to know
+#   # what the installation environment was/is.
+#   env="package env\n\n"
+#   env="${env}const (\n"
+#   env="${env}  BASE_DIR = \"${BASE_DIR}\"\n"
+#   env="${env}  VERSION = \"${VERSION}\"\n"
+#   env="${env}  NAME = \"${NAME}\"\n"
+#   env="${env}  PROFILE = \"${PROFILE}\"\n"
+#   env="${env})\n"
+#
+#   echo ${env} > ${GO_ENV_FILE}
+# fi
 
 # Setup configuration
 LOCAL_PATH="${BASE_PATH}/${LOCAL_DIR}"
@@ -59,6 +59,18 @@ if [ ! -d ${LOCAL_PATH} ]; then
   mkdir ${LOCAL_PATH}
   ln -s ${BIN_PATH} ${LOCAL_LINK}
 fi
+
+BIN_DIR="${BASE_PATH}/bin"
+GO_ENV_DIR="${BIN_DIR}/env"
+GO_ENV_FILE="${GO_ENV_DIR}/env.go"
+
+if [ ! -d ${GO_ENV_DIR} ]; then
+  mkdir ${GO_ENV_DIR}
+  touch ${GO_ENV_FILE}
+fi
+
+echo "CHECK"
+exit
 
 # Download the modules
 cd ${BASE_PATH}
@@ -90,7 +102,7 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     link="${link}  # Add the symbolic link to the version binary to the shell PATH.\n"
     link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n\n"
     link="${link}  # Used to link any shell configuration(s).\n"
-    link="${link}  source \${HOME}/${BASE_DIR}/${ENVIRONMENTS_DIR}/${PROFILE}\n"
+    link="${link}  source \${HOME}/${BASE_DIR}/${SHELL_DIR}/${PROFILE}\n"
     link="${link}fi\n"
     link="${link}\n$(cat ${PROFILE_PATH})"
 
