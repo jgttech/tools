@@ -2,7 +2,6 @@ package update
 
 import (
 	"context"
-	"fmt"
 
 	"jgttech/tools/path"
 	"jgttech/tools/sys"
@@ -24,17 +23,17 @@ func Command() *cli.Command {
 			sys.Panic(err)
 
 			// timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-			cmd := `git commit -m "WIP"`
-			commit := sys.StdCmd(cmd)
+			commit := sys.StdCmd(`git commit -m "WIP"`)
 			commit.Dir = pwd
-
-			fmt.Println("COMMAND:", cmd)
 
 			err = commit.Run()
 			sys.Panic(err)
 
-			// push := sys.StdCmd("git push")
-			// push.Dir = pwd
+			push := sys.StdCmd("git push")
+			push.Dir = pwd
+
+			err = push.Run()
+			sys.Panic(err)
 
 			return err
 		},
