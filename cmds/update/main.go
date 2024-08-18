@@ -11,6 +11,14 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
+func catch(err error) error {
+	if err != nil {
+		fmt.Printf(err.Error())
+	}
+
+	return nil
+}
+
 func Command() *cli.Command {
 	return &cli.Command{
 		Name: "update",
@@ -28,13 +36,13 @@ func Command() *cli.Command {
 			push.Dir = pwd
 
 			err = add.Run()
-			sys.Panic(err)
+			err = catch(err)
 
 			err = commit.Run()
-			sys.Panic(err)
+			err = catch(err)
 
 			err = push.Run()
-			sys.Panic(err)
+			err = catch(err)
 
 			return err
 		},
