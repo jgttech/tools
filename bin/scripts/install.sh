@@ -92,9 +92,9 @@ case `grep -Fq ${SEARCH_CRITERIA} ${PROFILE_PATH} >/dev/null; echo $?` in
     link="# jgttech/tools (generated on ${timestamp})\n"
     link="${link}if [ -d \${HOME}/${BASE_DIR} ]; then\n"
     link="${link}  # Add the symbolic link to the version binary to the shell PATH.\n"
-    link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/bin/local:\${PATH}\"\n\n"
+    link="${link}  export PATH=\"\${HOME}/${BASE_DIR}/${OUT_DIR}/${LOCAL_DIR}:\${PATH}\"\n\n"
     link="${link}  # Used to link any shell configuration(s).\n"
-    link="${link}  source \${HOME}/${BASE_DIR}/${SHELL_DIR}/${PROFILE}\n"
+    link="${link}  source \${HOME}/${BASE_DIR}/bin/${SHELL_DIR}/${PROFILE}\n"
     link="${link}fi\n"
     link="${link}\n$(cat ${PROFILE_PATH})"
 
