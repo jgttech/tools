@@ -2,9 +2,11 @@ package edit
 
 import (
 	"context"
-	// "jgttech/tools/sys"
-	// "log"
-	// "os"
+	"errors"
+	"fmt"
+	"jgttech/tools/.bin/env"
+	"os"
+	"path"
 
 	"github.com/urfave/cli/v3"
 )
@@ -13,17 +15,14 @@ func Command() *cli.Command {
 	return &cli.Command{
 		Name: "edit",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
+			home, ok := os.LookupEnv("HOME")
 
-			// cmd := sys.Cmd("nvim")
-			//
-			// // Bind to the current shell instance.
-			// cmd.Stdout = os.Stdout
-			// cmd.Stdin = os.Stdin
-			// cmd.Stderr = os.Stderr
-			//
-			// if err := cmd.Run(); err != nil {
-			// 	log.Fatal(err)
-			// }
+			if !ok {
+				return errors.New("Unable to find 'HOME' environment variable.")
+			}
+
+			baseDir := path.Join(home, env.BASE_DIR)
+			fmt.Println("BASE_DIR:", baseDir)
 
 			return nil
 		},
