@@ -22,8 +22,12 @@ func Command() *cli.Command {
 				return errors.New("Unable to find 'HOME' environment variable.")
 			}
 
-			command := exec.Command("nvim")
+			command := exec.Command("nvim", ".")
+
 			command.Dir = path.Join(home, env.BASE_DIR)
+			command.Stdout = os.Stdout
+			command.Stderr = os.Stderr
+			command.Stdin = os.Stdin
 
 			if err := command.Run(); err != nil {
 				log.Fatal(err)
