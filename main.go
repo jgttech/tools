@@ -19,7 +19,8 @@ import (
 
 func main() {
 	tools := &cli.Command{
-		Name: "tools",
+		Name:        "tools",
+		Description: "Custom tools for my own purposes.",
 		Commands: []*cli.Command{
 			build.Command(),
 			docker.Command(),
