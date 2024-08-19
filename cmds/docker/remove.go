@@ -9,6 +9,15 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
+func hashes(cmd string) string {
+	bytes, err := sys.Cmd(cmd).CombinedOutput()
+	sys.Catch(err)
+
+	hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
+
+	return hashes
+}
+
 func remove() *cli.Command {
 	return &cli.Command{
 		Name:  "remove",
@@ -18,16 +27,7 @@ func remove() *cli.Command {
 				Name:  "containers",
 				Usage: "Remove ALL Docker containers",
 				Action: func(ctx context.Context, c *cli.Command) error {
-					bytes, err := sys.Cmd("docker ps -qa").CombinedOutput()
-					sys.Catch(err)
-
-					hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
-
-					if hashes != "" {
-						cmd := sys.StdCmd(fmt.Sprintf("docker rm -f %s", hashes))
-						sys.Catch(cmd.Run())
-					}
-
+					sys.Catch(sys.StdCmd(fmt.Sprintf("docker rm -f %s", hashes("docker ps -qa"))).Run())
 					return nil
 				},
 			},
@@ -35,16 +35,7 @@ func remove() *cli.Command {
 				Name:  "images",
 				Usage: "Remove ALL Docker images",
 				Action: func(ctx context.Context, c *cli.Command) error {
-					bytes, err := sys.Cmd("docker images -qq").CombinedOutput()
-					sys.Catch(err)
-
-					hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
-
-					if hashes != "" {
-						cmd := sys.StdCmd(fmt.Sprintf("docker rmi -f %s", hashes))
-						sys.Catch(cmd.Run())
-					}
-
+					sys.Catch(sys.StdCmd(fmt.Sprintf("docker rmi -f %s", hashes("docker images -qq"))).Run())
 					return nil
 				},
 			},
@@ -52,16 +43,7 @@ func remove() *cli.Command {
 				Name:  "volumes",
 				Usage: "Remove ALL Docker volumes",
 				Action: func(ctx context.Context, c *cli.Command) error {
-					bytes, err := sys.Cmd("docker volume ls -q").CombinedOutput()
-					sys.Catch(err)
-
-					hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
-
-					if hashes != "" {
-						cmd := sys.StdCmd(fmt.Sprintf("docker volume rm -f %s", hashes))
-						sys.Catch(cmd.Run())
-					}
-
+					sys.Catch(sys.StdCmd(fmt.Sprintf("docker volume rm -f %s", hashes("docker volume ls -q"))).Run())
 					return nil
 				},
 			},
@@ -69,7 +51,7 @@ func remove() *cli.Command {
 				Name:  "networks",
 				Usage: "Remove ALL Docker networks",
 				Action: func(ctx context.Context, c *cli.Command) error {
-					// sys.Catch(sys.Cmd("docker network rm -f $(docker network ls -q)").Run())
+					sys.Catch(sys.StdCmd(fmt.Sprintf("docker network rm -f %s", hashes("docker network ls -q"))).Run())
 					return nil
 				},
 			},
