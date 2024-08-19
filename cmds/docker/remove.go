@@ -35,7 +35,16 @@ func remove() *cli.Command {
 				Name:  "images",
 				Usage: "Remove ALL Docker images",
 				Action: func(ctx context.Context, c *cli.Command) error {
-					// sys.Catch(sys.StdCmd("docker rmi -f $(docker images -qq)").Run())
+					bytes, err := sys.Cmd("docker images -qq").CombinedOutput()
+					sys.Catch(err)
+
+					hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
+
+					if hashes != "" {
+						cmd := sys.StdCmd(fmt.Sprintf("docker rmi -f %s", hashes))
+						sys.Catch(cmd.Run())
+					}
+
 					return nil
 				},
 			},
@@ -43,7 +52,16 @@ func remove() *cli.Command {
 				Name:  "volumes",
 				Usage: "Remove ALL Docker volumes",
 				Action: func(ctx context.Context, c *cli.Command) error {
-					// sys.Catch(sys.Cmd("docker volume rm -f $(docker volume ls -q)").Run())
+					bytes, err := sys.Cmd("docker volume ls -q").CombinedOutput()
+					sys.Catch(err)
+
+					hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
+
+					if hashes != "" {
+						cmd := sys.StdCmd(fmt.Sprintf("docker volume rm -f %s", hashes))
+						sys.Catch(cmd.Run())
+					}
+
 					return nil
 				},
 			},
