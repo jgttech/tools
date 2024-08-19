@@ -19,6 +19,7 @@ func nuke() *cli.Command {
 				sys.Catch(sys.StdCmd(fmt.Sprintf("tools docker remove %s", cmd)).Run())
 			}
 
+			sys.Catch(sys.StdCmd("tools docker ls").Run())
 			return nil
 		},
 	}
