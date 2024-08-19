@@ -26,7 +26,7 @@ func rebase() *cli.Command {
 			cmds := []string{
 				fmt.Sprintf("git checkout %s", branch),
 				"git pull",
-				fmt.Sprintf("git checkoug %s", current),
+				fmt.Sprintf("git checkout %s", current),
 				fmt.Sprintf("git rebase %s", branch),
 			}
 
