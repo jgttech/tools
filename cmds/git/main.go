@@ -14,6 +14,7 @@ func Command() *cli.Command {
 			co(),
 			wip(),
 			rebase(),
+			merge(),
 		},
 	}
 }

@@ -14,6 +14,7 @@ func rebase() *cli.Command {
 		Usage: "Passthrough for Git rebase, which defaults to 'main'",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			branch := cmd.Args().First()
+
 			bytes, err := sys.Cmd("git rev-parse --abbrev-ref HEAD").CombinedOutput()
 			sys.Catch(err)
 
@@ -31,8 +32,7 @@ func rebase() *cli.Command {
 			}
 
 			for _, cmd := range cmds {
-				fmt.Println(cmd)
-				// sys.Catch(sys.StdCmd(cmd).Run())
+				sys.Catch(sys.StdCmd(cmd).Run())
 			}
 
 			return nil
