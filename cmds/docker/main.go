@@ -8,6 +8,7 @@ func Command() *cli.Command {
 		Usage: "Docker convenience command/utilities.",
 		Commands: []*cli.Command{
 			ls(),
+			remove(),
 		},
 	}
 }
