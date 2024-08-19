@@ -11,6 +11,7 @@ alias cm="tools git commit"
 alias push="tools git push"
 alias co="tools git co"
 alias wip="tools git wip"
+alias rebase="tools git rebase"
 
 # Docker
 alias ds="tools docker ls"

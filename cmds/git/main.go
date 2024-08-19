@@ -12,6 +12,7 @@ func Command() *cli.Command {
 			push(),
 			co(),
 			wip(),
+			rebase(),
 		},
 	}
 }
