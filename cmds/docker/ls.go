@@ -48,7 +48,7 @@ func ls() *cli.Command {
 
 			for _, command := range commands {
 				fmt.Println(bold("--------------------------------"))
-				fmt.Println(bold(fmt.Sprintf("%s\n\n", command.header)))
+				fmt.Println(bold(fmt.Sprintf("%s\n", command.header)))
 				err := command.Run()
 				fmt.Printf("\n\n")
 

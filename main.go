@@ -5,6 +5,7 @@ import (
 	"jgttech/tools/cmds/build"
 	"jgttech/tools/cmds/docker"
 	"jgttech/tools/cmds/edit"
+	"jgttech/tools/cmds/env"
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/sync"
 	"jgttech/tools/cmds/uninstall"
@@ -23,6 +24,7 @@ func main() {
 			build.Command(),
 			docker.Command(),
 			edit.Command(),
+			env.Command(),
 			git.Command(),
 			sync.Command(),
 			uninstall.Command(),

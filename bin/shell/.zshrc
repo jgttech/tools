@@ -1,6 +1,7 @@
 #!/usr/bin/env zsh
 tools sync
 
+alias tools-dir="cd \${HOME}/$(tools env BASE_DIR)"
 alias vim="nvim"
 alias add="tools git add"
 alias cm="tools git commit"
