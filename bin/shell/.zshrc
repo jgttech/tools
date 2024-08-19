@@ -1,6 +1,11 @@
 #!/usr/bin/env zsh
 tools sync
 
+# GPG Signer
+function signer {
+  export GPG_TTY=$(tty)
+}
+
 # Tools
 alias tools-dir="cd \${HOME}/$(tools env BASE_DIR)"
 
