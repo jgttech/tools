@@ -31,7 +31,8 @@ func rebase() *cli.Command {
 			}
 
 			for _, cmd := range cmds {
-				sys.Catch(sys.StdCmd(cmd).Run())
+				fmt.Println(cmd)
+				// sys.Catch(sys.StdCmd(cmd).Run())
 			}
 
 			return nil
