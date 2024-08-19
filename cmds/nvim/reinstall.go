@@ -2,6 +2,7 @@ package nvim
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path"
 
@@ -21,7 +22,7 @@ func reinstall() *cli.Command {
 				path.Join(home, ".cache/nvim"),
 			}
 			cmds := []string{
-				"gh repo clone jgttech/nvim ${HOME}/.config/nvim",
+				fmt.Sprintf("gh repo clone jgttech/nvim %s/.config/nvim", home),
 				"npm i -g typescript typescript-language-server",
 				"nvim",
 			}
