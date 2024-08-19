@@ -14,8 +14,8 @@ alias wip="tools git wip"
 
 # Docker
 alias ds="tools docker ls"
+alias dn="tools docker nuke"
 alias drc="tools docker remove containers"
 alias dri="tools docker remove images"
 alias drv="tools docker remove volumes"
 alias drn="tools docker remove networks"
-alias dn="tools docker nuke"
