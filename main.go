@@ -7,6 +7,7 @@ import (
 	"jgttech/tools/cmds/edit"
 	"jgttech/tools/cmds/env"
 	"jgttech/tools/cmds/git"
+	"jgttech/tools/cmds/nvim"
 	"jgttech/tools/cmds/sync"
 	"jgttech/tools/cmds/uninstall"
 	"jgttech/tools/cmds/update"
@@ -27,6 +28,7 @@ func main() {
 			edit.Command(),
 			env.Command(),
 			git.Command(),
+			nvim.Command(),
 			sync.Command(),
 			uninstall.Command(),
 			update.Command(),
