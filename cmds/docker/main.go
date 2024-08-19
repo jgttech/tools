@@ -9,6 +9,7 @@ func Command() *cli.Command {
 		Commands: []*cli.Command{
 			ls(),
 			remove(),
+			kill(),
 		},
 	}
 }

@@ -4,19 +4,9 @@ import (
 	"context"
 	"fmt"
 	"jgttech/tools/sys"
-	"strings"
 
 	"github.com/urfave/cli/v3"
 )
-
-func hashes(cmd string) string {
-	bytes, err := sys.Cmd(cmd).CombinedOutput()
-	sys.Catch(err)
-
-	hashes := strings.TrimSpace(strings.Join(strings.Split(string(bytes), "\n"), " "))
-
-	return hashes
-}
 
 func remove() *cli.Command {
 	return &cli.Command{
