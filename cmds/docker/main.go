@@ -10,6 +10,8 @@ func Command() *cli.Command {
 			ls(),
 			remove(),
 			kill(),
+			prune(),
+			nuke(),
 		},
 	}
 }

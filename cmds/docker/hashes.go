@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func hashes(cmd string) string {
+func parse(cmd string) string {
 	bytes, err := sys.Cmd(cmd).CombinedOutput()
 	sys.Catch(err)
 

@@ -13,7 +13,7 @@ func kill() *cli.Command {
 		Name:  "kill",
 		Usage: "Kills ALL Docker processes.",
 		Action: func(ctx context.Context, c *cli.Command) error {
-			sys.Catch(sys.Cmd(fmt.Sprintf("docker kill %s", hashes("docker ps -qa"))).Run())
+			sys.Catch(sys.Cmd(fmt.Sprintf("docker kill %s", parse("docker ps -qa"))).Run())
 			return nil
 		},
 	}
