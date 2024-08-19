@@ -13,7 +13,8 @@ import (
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name: "build",
+		Name:  "build",
+		Usage: "Builds/Rebuilds the tools CLI",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			pwd, err := path.Join()
 			sys.Panic(err)

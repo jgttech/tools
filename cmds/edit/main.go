@@ -24,7 +24,8 @@ func editPath(cmd string) string {
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name: "edit",
+		Name:  "edit",
+		Usage: "Opens the tools CLI code in Neovim. Also accepts the name of a command to open its 'main.go' file, if provided.",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			editCommand := cmd.Args().First()
 

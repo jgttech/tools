@@ -23,7 +23,8 @@ const message string = `
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name: "uninstall",
+		Name:  "uninstall",
+		Usage: "Removes the tools CLI source code, but NOT the shell profile link.",
 		Action: func(ctx context.Context, _ *cli.Command) error {
 			toolsPath, err := path.Join()
 			sys.Panic(err)

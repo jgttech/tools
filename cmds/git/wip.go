@@ -14,7 +14,8 @@ func wip() *cli.Command {
 	var signed bool
 
 	return &cli.Command{
-		Name: "wip",
+		Name:  "wip",
+		Usage: "Automatically generates a commit formatted as 'WIP <timestamp>'",
 		Flags: []cli.Flag{
 			&cli.BoolFlag{
 				Name:        "signed",

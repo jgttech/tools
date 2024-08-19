@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"jgttech/tools/cmds/build"
+	"jgttech/tools/cmds/docker"
 	"jgttech/tools/cmds/edit"
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/sync"
@@ -20,6 +21,7 @@ func main() {
 		Name: "tools",
 		Commands: []*cli.Command{
 			build.Command(),
+			docker.Command(),
 			edit.Command(),
 			git.Command(),
 			sync.Command(),

@@ -8,7 +8,8 @@ import (
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name: "sync",
+		Name:  "sync",
+		Usage: "Performs any synchronization needed for the tools CLI.",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			return nil
 		},

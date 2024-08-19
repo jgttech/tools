@@ -13,7 +13,8 @@ import (
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name: "update",
+		Name:  "update",
+		Usage: "Generates an update commit for the tools CLI changes, if they are made.",
 		Action: func(ctx context.Context, _ *cli.Command) error {
 			pwd, err := path.Join()
 			sys.Panic(err)
