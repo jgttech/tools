@@ -10,6 +10,7 @@ func Command() *cli.Command {
 			add(),
 			commit(),
 			push(),
+			co(),
 			wip(),
 		},
 	}
