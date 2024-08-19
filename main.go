@@ -6,6 +6,7 @@ import (
 	"jgttech/tools/cmds/docker"
 	"jgttech/tools/cmds/edit"
 	"jgttech/tools/cmds/env"
+	"jgttech/tools/cmds/foo"
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/nvim"
 	"jgttech/tools/cmds/pi"
@@ -35,6 +36,7 @@ func main() {
 			uninstall.Command(),
 			update.Command(),
 			version.Command(),
+			foo.Command(),
 		},
 	}
 
