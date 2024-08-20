@@ -3,8 +3,9 @@ package sync
 import (
 	"context"
 
-	"github.com/urfave/cli/v3"
 	"jgttech/tools/sys"
+
+	"github.com/urfave/cli/v3"
 )
 
 func Command() *cli.Command {
