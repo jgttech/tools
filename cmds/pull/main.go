@@ -13,6 +13,11 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
+const (
+	git_LATEST  = "Already up to date."
+	git_CHANGES = "You have unstaged changes"
+)
+
 func Command() *cli.Command {
 	return &cli.Command{
 		Name:  "pull",
@@ -33,21 +38,22 @@ func Command() *cli.Command {
 			bytes, _ := cmd.CombinedOutput()
 			out := string(bytes)
 
-			if strings.Contains(out, "Already up to date.") {
-				fmt.Println("Already at the latest.")
+			if strings.Contains(out, git_LATEST) {
+				fmt.Println(git_LATEST)
 				return nil
 			}
 
-			if strings.Contains(out, "You have unstaged changes") {
+			if strings.Contains(out, git_CHANGES) {
 				fmt.Println("You have unstaged changes, unable to pull the latest.")
+				fmt.Println("You can use 'tools update' to commit and push your changes.")
 				return nil
 			}
 
 			buildPath := path.Join(repo, env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
-			// build := sys.Cmd(fmt.Sprintf("go build -o %s", buildPath))
-			// build.Dir = repo
+			build := sys.Cmd(fmt.Sprintf("go build -o %s", buildPath))
+			build.Dir = repo
 
-			fmt.Println(fmt.Sprintf("go build -o %s", buildPath))
+			sys.Catch(build.Run())
 			return nil
 		},
 	}
