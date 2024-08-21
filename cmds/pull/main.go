@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"strings"
 
 	"jgttech/tools/.bin/env"
 	"jgttech/tools/sys"
@@ -29,10 +30,15 @@ func Command() *cli.Command {
 			cmd := sys.Cmd("git pull")
 			cmd.Dir = repo
 
-			out, err := cmd.CombinedOutput()
+			bytes, err := cmd.CombinedOutput()
 			sys.Catch(err)
 
-			fmt.Printf(string(out))
+			out := string(bytes)
+
+			if strings.Contains(out, "Already") {
+				fmt.Println("Hello world")
+			}
+
 			return nil
 		},
 	}
