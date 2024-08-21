@@ -10,7 +10,7 @@ func Command() *cli.Command {
 		Usage: "Neovim utilities",
 		Commands: []*cli.Command{
 			reinstall(),
-			sync(),
+			pull(),
 			edit(),
 		},
 	}

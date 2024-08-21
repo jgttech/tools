@@ -9,6 +9,7 @@ import (
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/nvim"
 	"jgttech/tools/cmds/pi"
+	"jgttech/tools/cmds/pull"
 	"jgttech/tools/cmds/sync"
 	"jgttech/tools/cmds/uninstall"
 	"jgttech/tools/cmds/update"
@@ -31,6 +32,7 @@ func main() {
 			git.Command(),
 			nvim.Command(),
 			pi.Command(),
+			pull.Command(),
 			sync.Command(),
 			uninstall.Command(),
 			update.Command(),

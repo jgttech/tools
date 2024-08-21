@@ -13,7 +13,11 @@ func Command() *cli.Command {
 		Name:  "sync",
 		Usage: "Performs any synchronization needed for the tools CLI.",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			sys.StdCmd("tools nvim sync")
+			// Pulls the latest changes for the tools.
+			sys.StdCatchRun("tools pull")
+
+			// Pulls the latest changes for Neovim.
+			sys.StdCatchRun("tools nvim pull")
 			return nil
 		},
 	}

@@ -9,10 +9,10 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-func sync() *cli.Command {
+func pull() *cli.Command {
 	return &cli.Command{
-		Name:  "sync",
-		Usage: "Synchronizes local and remote Neovim configuration.",
+		Name:  "pull",
+		Usage: "Pull latest Neovim changes.",
 		Action: func(ctx context.Context, _ *cli.Command) error {
 			home, _ := os.LookupEnv("HOME")
 			dir := path.Join(home, ".config/nvim")
