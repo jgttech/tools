@@ -1,4 +1,4 @@
-package foo
+package bar
 
 import (
 	"context"
@@ -9,10 +9,10 @@ import (
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name:  "foo",
-		Usage: "Testing foo",
+		Name:  "bar",
+		Usage: "Testing bar",
 		Action: func(ctx context.Context, _ *cli.Command) error {
-			fmt.Println("FOO")
+			fmt.Println("BAR`")
 			return nil
 		},
 	}
