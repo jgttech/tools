@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"jgttech/tools/cmds/bar"
 	"jgttech/tools/cmds/build"
 	"jgttech/tools/cmds/docker"
 	"jgttech/tools/cmds/edit"
@@ -38,7 +37,6 @@ func main() {
 			uninstall.Command(),
 			update.Command(),
 			version.Command(),
-			bar.Command(),
 		},
 	}
 
