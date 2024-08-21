@@ -32,7 +32,7 @@ func Command() *cli.Command {
 			out, err := cmd.CombinedOutput()
 			sys.Catch(err)
 
-			fmt.Println(string(out))
+			fmt.Printf(string(out))
 			return nil
 		},
 	}
