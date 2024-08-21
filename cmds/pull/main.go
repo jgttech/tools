@@ -34,7 +34,7 @@ func Command() *cli.Command {
 			out := string(bytes)
 
 			if strings.Contains(out, "Already up to date.") {
-				fmt.Println("HELLO WORLD")
+				fmt.Println("Already at the latest.")
 				return nil
 			}
 
