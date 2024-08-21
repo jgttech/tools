@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"path"
+	"strings"
 
 	"jgttech/tools/.bin/env"
 	"jgttech/tools/sys"
@@ -30,25 +31,23 @@ func Command() *cli.Command {
 			cmd.Dir = repo
 
 			bytes, _ := cmd.CombinedOutput()
-			fmt.Println(string(bytes))
+			out := string(bytes)
 
-			// cmd := sys.Cmd("git pull")
-			// cmd.Dir = repo
-			//
-			// bytes, err := cmd.Output()
-			// sys.Catch(err)
-			//
-			// out := string(bytes)
-			//
-			// if strings.Contains(out, "Already up to date.") {
-			// 	return nil
-			// }
+			if strings.Contains(out, "Already up to date.") {
+				fmt.Println("HELLO WORLD")
+				return nil
+			}
 
-			// buildPath := path.Join(repo, env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
+			if strings.Contains(out, "You have unstaged changes") {
+				fmt.Println("You have unstaged changes, unable to pull the latest.")
+				return nil
+			}
+
+			buildPath := path.Join(repo, env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
 			// build := sys.Cmd(fmt.Sprintf("go build -o %s", buildPath))
 			// build.Dir = repo
 
-			// fmt.Println(fmt.Sprintf("go build -o %s", buildPath))
+			fmt.Println(fmt.Sprintf("go build -o %s", buildPath))
 			return nil
 		},
 	}
