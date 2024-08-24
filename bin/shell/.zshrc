@@ -18,6 +18,7 @@ alias pull="tools git pull"
 alias co="tools git co"
 alias wip="tools git wip"
 alias rebase="tools git rebase"
+alias merge="tools git merge"
 
 # Docker
 alias ds="tools docker ls"
