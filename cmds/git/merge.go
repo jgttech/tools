@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"jgttech/tools/sys"
+	"strings"
 
 	"github.com/urfave/cli/v3"
 )
@@ -32,7 +33,7 @@ func merge() *cli.Command {
 			}
 
 			for _, cmd := range cmds {
-				sys.Catch(sys.StdCmd(cmd).Run())
+				sys.Catch(sys.StdCmd(strings.TrimSpace(cmd)).Run())
 			}
 
 			return nil
