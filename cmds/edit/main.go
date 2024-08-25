@@ -50,6 +50,11 @@ func Command() *cli.Command {
 				}
 			}
 
+			if target == "" {
+				fmt.Println(fmt.Sprintf("No file found for comamnd: '%s'", editCommand))
+				return nil
+			}
+
 			sys.StdCatchRun(fmt.Sprintf("nvim %s", target))
 			return nil
 		},
