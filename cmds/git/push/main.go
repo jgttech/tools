@@ -1,4 +1,4 @@
-package git
+package push
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-func push() *cli.Command {
+func Command() *cli.Command {
 	return &cli.Command{
 		Name:            "push",
 		Usage:           "A passthrough for 'git push'.",

@@ -1,4 +1,4 @@
-package git
+package commit
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-func commit() *cli.Command {
+func Command() *cli.Command {
 	return &cli.Command{
 		Name:            "commit",
 		Usage:           "A passthrough for 'git commit'.",

@@ -1,4 +1,4 @@
-package git
+package add
 
 import (
 	"context"
@@ -10,16 +10,16 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-func pull() *cli.Command {
+func Command() *cli.Command {
 	return &cli.Command{
-		Name:            "pull",
-		Usage:           "A passthrough for 'git pull'.",
+		Name:            "add",
+		Usage:           "A passthrough for 'git add'.",
 		SkipFlagParsing: true,
 		Action: func(ctx context.Context, _ *cli.Command) error {
 			argv := strings.Join(os.Args[3:], " ")
-			pull := strings.TrimSpace(fmt.Sprintf(`git pull %s`, argv))
-			command := sys.StdCmd(pull)
-			err := command.Run()
+			add := strings.TrimSpace(fmt.Sprintf(`git add %s`, argv))
+			cmd := sys.StdCmd(add)
+			err := cmd.Run()
 
 			return err
 		},

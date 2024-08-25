@@ -1,4 +1,4 @@
-package git
+package rebase
 
 import (
 	"context"
@@ -9,10 +9,10 @@ import (
 	"github.com/urfave/cli/v3"
 )
 
-func merge() *cli.Command {
+func Command() *cli.Command {
 	return &cli.Command{
-		Name:  "merge",
-		Usage: "Automatically perform a Git merge process.",
+		Name:  "rebase",
+		Usage: "Passthrough for Git rebase, which defaults to 'main'",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
 			branch := cmd.Args().First()
 
@@ -29,7 +29,7 @@ func merge() *cli.Command {
 				fmt.Sprintf("git checkout %s", branch),
 				"git pull",
 				fmt.Sprintf("git checkout %s", current),
-				fmt.Sprintf("git merge %s", branch),
+				fmt.Sprintf("git rebase %s", branch),
 			}
 
 			for _, cmd := range cmds {

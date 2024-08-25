@@ -1,4 +1,4 @@
-package git
+package wip
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"jgttech/tools/sys"
 )
 
-func wip() *cli.Command {
+func Command() *cli.Command {
 	var signed bool
 
 	return &cli.Command{
