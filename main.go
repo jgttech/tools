@@ -8,6 +8,7 @@ import (
 	"jgttech/tools/cmds/env"
 	"jgttech/tools/cmds/git"
 	"jgttech/tools/cmds/nvim"
+	"jgttech/tools/cmds/nvm"
 	"jgttech/tools/cmds/pi"
 	"jgttech/tools/cmds/pull"
 	"jgttech/tools/cmds/sync"
@@ -31,6 +32,7 @@ func main() {
 			env.Command(),
 			git.Command(),
 			nvim.Command(),
+			nvm.Command(),
 			pi.Command(),
 			pull.Command(),
 			sync.Command(),

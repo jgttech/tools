@@ -17,8 +17,21 @@ func Command() *cli.Command {
 		Name:  "edit",
 		Usage: "Opens the tools CLI code in Neovim. Also accepts the name of a command to open its 'main.go' file, if provided.",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
+			var editPath []string
+
+			for idx := range cmd.Args().Len() {
+				arg := cmd.Args().Get(idx)
+				tokens := strings.Split(arg, " ")
+
+				for idx, token := range tokens {
+					tokens[idx] = strings.TrimSpace(token)
+				}
+
+				editPath = append(editPath, strings.Join(tokens, "/"))
+			}
+
 			var target string
-			editCommand := cmd.Args().First()
+			editCommand := strings.TrimSpace(strings.Join(editPath, "/"))
 
 			rawEditPath, err := path.Join(editCommand)
 			sys.Panic(err)
