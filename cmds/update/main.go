@@ -1,44 +1,19 @@
 package update
 
 import (
-	"context"
-	"fmt"
-	"time"
-
-	"jgttech/tools/path"
-	"jgttech/tools/sys"
-
 	"github.com/urfave/cli/v3"
+	"jgttech/tools/cmds/update/major"
+	"jgttech/tools/cmds/update/minor"
+	"jgttech/tools/cmds/update/patch"
 )
 
 func Command() *cli.Command {
 	return &cli.Command{
-		Name:  "update",
-		Usage: "Generates an update commit for the tools CLI changes, if they are made.",
-		Action: func(ctx context.Context, _ *cli.Command) error {
-			pwd, err := path.Join()
-			sys.Panic(err)
-
-			add := sys.StdCmd(`git add .`)
-			add.Dir = pwd
-
-			commit := sys.StdCmd(fmt.Sprintf(`git commit -m "WIP %s"`, time.Now()))
-			commit.Dir = pwd
-
-			push := sys.StdCmd(`git push`)
-			push.Dir = pwd
-
-			err = sys.Catch(add.Run())
-
-			if err == nil {
-				err = sys.Catch(commit.Run())
-
-				if err == nil {
-					sys.Catch(push.Run())
-				}
-			}
-
-			return nil
+		Name: "update",
+		Commands: []*cli.Command{
+			major.Command(),
+			minor.Command(),
+			patch.Command(),
 		},
 	}
 }
