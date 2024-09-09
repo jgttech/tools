@@ -56,13 +56,6 @@ if [ ! -d ${GO_ENV_DIR} ]; then
   env="package env\n\n"
   env="${env}const (\n"
   env="${env}  BASE_DIR     = \"${BASE_DIR}\"\n"
-  env="${env}  OUT_DIR      = \"${OUT_DIR}\"\n"
-  env="${env}  VERSIONS_DIR = \"${VERSIONS_DIR}\"\n"
-  env="${env}  LOCAL_DIR    = \"${LOCAL_DIR}\"\n"
-  env="${env}  SHELL_DIR    = \"${SHELL_DIR}\"\n"
-  env="${env}  VERSION      = \"${VERSION}\"\n"
-  env="${env}  NAME         = \"${NAME}\"\n"
-  env="${env}  PROFILE      = \"${PROFILE}\"\n"
   env="${env})\n"
 
   echo "${env}" > ${GO_ENV_FILE}

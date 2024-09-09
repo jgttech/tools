@@ -18,7 +18,6 @@ func Command() *cli.Command {
 
 			conf.IncrementPatchVersion()
 			conf.Write()
-			conf.GenerateEnv()
 
 			return nil
 		}),

@@ -1,8 +1,6 @@
 package pkg
 
 import (
-	"fmt"
-	"jgttech/tools/.bin/env"
 	"jgttech/tools/path"
 	"jgttech/tools/str"
 	"os"
@@ -161,23 +159,4 @@ func (p *pkg) Write() {
 
 	data = strings.TrimSpace(data)
 	os.WriteFile(p.path, []byte(data), 0666)
-}
-
-func (p *pkg) GenerateEnv() {
-	envFilePath := path.Join(p.outDir.value, "env/env.go")
-
-	data := "package env\n\n"
-	data += "const (\n"
-	data += fmt.Sprintf("  BASE_DIR    = \"%s\"\n", env.BASE_DIR)
-	data += fmt.Sprintf("  OUT_DIR     = \"%s\"\n", p.outDir.value)
-	data += fmt.Sprintf("  VERSION_DIR = \"%s\"\n", p.versionsDir.value)
-	data += fmt.Sprintf("  LOCAL_DIR   = \"%s\"\n", p.localDir.value)
-	data += fmt.Sprintf("  SHELL_DIR   = \"%s\"\n", p.shellDir.value)
-	data += fmt.Sprintf("  VERSION     = \"%s\"\n", p.version.value)
-	data += fmt.Sprintf("  NAME        = \"%s\"\n", p.name.value)
-	data += fmt.Sprintf("  PROFILE     = \"%s\"\n", p.profile.value)
-	data += ")\n"
-
-	fmt.Println(data)
-	os.WriteFile(envFilePath, []byte(data), 0666)
 }
