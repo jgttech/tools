@@ -4,7 +4,7 @@ import (
 	"context"
 
 	"jgttech/tools/cmds/update/update"
-	"jgttech/tools/path"
+	"jgttech/tools/pkg"
 
 	"github.com/urfave/cli/v3"
 )
@@ -14,10 +14,13 @@ func Command() *cli.Command {
 		Name:  "patch",
 		Usage: "Automatically increments the PATCH version of the CLI.",
 		Action: update.Repo(func(ctx context.Context, cmd *cli.Command) error {
-			basePath, err := path.Join()
+			conf := pkg.Load()
 
-			println(basePath)
-			return err
+			conf.IncrementPatchVersion()
+			conf.Write()
+			conf.GenerateEnv()
+
+			return nil
 		}),
 	}
 }

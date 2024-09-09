@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"jgttech/tools/path"
-	"jgttech/tools/sys"
 
 	"github.com/urfave/cli/v3"
 )
@@ -26,8 +25,7 @@ func Command() *cli.Command {
 		Name:  "uninstall",
 		Usage: "Removes the tools CLI source code, but NOT the shell profile link.",
 		Action: func(ctx context.Context, _ *cli.Command) error {
-			toolsPath, err := path.Join()
-			sys.Panic(err)
+			toolsPath := path.Join()
 
 			os.RemoveAll(toolsPath)
 			fmt.Printf(message)

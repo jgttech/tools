@@ -16,11 +16,8 @@ func Command() *cli.Command {
 		Name:  "build",
 		Usage: "Builds/Rebuilds the tools CLI",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			pwd, err := path.Join()
-			sys.Panic(err)
-
-			buildDir, err := path.Join(env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
-			sys.Panic(err)
+			pwd := path.Join()
+			buildDir := path.Join(env.OUT_DIR, env.VERSIONS_DIR, env.VERSION, env.NAME)
 
 			build := sys.StdCmd(fmt.Sprintf("go build -o %s", buildDir))
 			build.Dir = pwd

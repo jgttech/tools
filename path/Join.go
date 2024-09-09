@@ -4,12 +4,12 @@ import (
 	p "path"
 )
 
-func Join(paths ...string) (string, error) {
+func Join(paths ...string) string {
 	baseDir, err := baseDir()
 
 	if err != nil {
-		return "", err
+		panic(err)
 	}
 
-	return p.Join(append([]string{baseDir}, paths...)...), nil
+	return p.Join(append([]string{baseDir}, paths...)...)
 }

@@ -33,17 +33,10 @@ func Command() *cli.Command {
 			var target string
 			editCommand := strings.TrimSpace(strings.Join(editPath, "/"))
 
-			rawEditPath, err := path.Join(editCommand)
-			sys.Panic(err)
-
-			cmdEditPath, err := path.Join("cmds", editCommand)
-			sys.Panic(err)
-
+			rawEditPath := path.Join(editCommand)
+			cmdEditPath := path.Join("cmds", editCommand)
 			rawEditPathMain := strings.Join([]string{rawEditPath, "main.go"}, "/")
-			sys.Panic(err)
-
 			cmdEditPathMain := strings.Join([]string{cmdEditPath, "main.go"}, "/")
-			sys.Panic(err)
 
 			editPermutations := []string{
 				rawEditPath,
