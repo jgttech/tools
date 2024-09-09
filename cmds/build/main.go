@@ -3,6 +3,7 @@ package build
 import (
 	"context"
 	"fmt"
+	"os"
 
 	"jgttech/tools/path"
 	"jgttech/tools/pkg"
@@ -26,6 +27,7 @@ func Command() *cli.Command {
 			version := conf.Version().Value()
 			name := conf.Name().Value()
 			linkWorkingDir := path.Join(outDir, localDir)
+			linkFile := path.Join(outDir, localDir, name)
 			linkPath := path.Join(outDir, versionsDir, version, name)
 			buildDir := path.Join(outDir, versionsDir, version, name)
 
@@ -34,6 +36,10 @@ func Command() *cli.Command {
 
 			if err := build.Run(); err != nil {
 				panic(err)
+			}
+
+			if _, err := os.Stat(linkFile); err == nil {
+				os.Remove(linkFile)
 			}
 
 			ln := sys.Cmd(fmt.Sprintf("ln -s %s %s", linkPath, name))
