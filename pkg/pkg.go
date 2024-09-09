@@ -165,18 +165,17 @@ func (p *pkg) Write() {
 
 func (p *pkg) GenerateEnv() {
 	envFilePath := path.Join(p.outDir.value, "env/env.go")
+
 	data := "package env\n\n"
 	data += "const (\n"
-
-	data += fmt.Sprintf("  %s = \"%s\"\n", "BASE_DIR", env.BASE_DIR)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "OUT_DIR", p.outDir.value)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "VERSIONS_DIR", p.versionsDir.value)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "LOCAL_DIR", p.localDir.value)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "SHELL_DIR", p.shellDir.value)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "VERSION", p.version.value)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "NAME", p.name.value)
-	data += fmt.Sprintf("  %s = \"%s\"\n", "PROFILE", p.profile.value)
-
+	data += fmt.Sprintf("  BASE_DIR =    \"%s\"\n", env.BASE_DIR)
+	data += fmt.Sprintf("  OUT_DIR =     \"%s\"\n", p.outDir.value)
+	data += fmt.Sprintf("  VERSION_DIR = \"%s\"\n", p.versionsDir.value)
+	data += fmt.Sprintf("  LOCAL_DIR =   \"%s\"\n", p.localDir.value)
+	data += fmt.Sprintf("  SHELL_DIR =   \"%s\"\n", p.shellDir.value)
+	data += fmt.Sprintf("  VERSION =     \"%s\"\n", p.version.value)
+	data += fmt.Sprintf("  NAME =        \"%s\"\n", p.name.value)
+	data += fmt.Sprintf("  PROFILE =     \"%s\"\n", p.profile.value)
 	data += ")\n"
 
 	fmt.Println(data)
