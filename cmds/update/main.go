@@ -1,10 +1,11 @@
 package update
 
 import (
-	"github.com/urfave/cli/v3"
 	"jgttech/tools/cmds/update/major"
 	"jgttech/tools/cmds/update/minor"
 	"jgttech/tools/cmds/update/patch"
+
+	"github.com/urfave/cli/v3"
 )
 
 func Command() *cli.Command {
