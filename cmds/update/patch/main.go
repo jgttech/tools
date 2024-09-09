@@ -5,6 +5,7 @@ import (
 
 	"jgttech/tools/cmds/update/update"
 	"jgttech/tools/pkg"
+	"jgttech/tools/sys"
 
 	"github.com/urfave/cli/v3"
 )
@@ -18,6 +19,8 @@ func Command() *cli.Command {
 
 			conf.IncrementPatchVersion()
 			conf.Write()
+
+			sys.StdCatchRun("tools build")
 
 			return nil
 		}),

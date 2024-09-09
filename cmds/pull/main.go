@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"jgttech/tools/.bin/env"
-	"jgttech/tools/pkg"
 	"jgttech/tools/sys"
 
 	"github.com/urfave/cli/v3"
@@ -25,11 +24,6 @@ func Command() *cli.Command {
 		Usage: "Pull latest tools changes and compile with new changes if necessary",
 		Action: func(ctx context.Context, _ *cli.Command) error {
 			home, ok := os.LookupEnv("HOME")
-			conf := pkg.Load()
-			outDir := conf.OutDir().Value()
-			versionsDir := conf.VersionsDir().Value()
-			version := conf.Version().Value()
-			name := conf.Name().Value()
 
 			if !ok {
 				fmt.Println("Unable to sync tools repo.")
@@ -55,11 +49,7 @@ func Command() *cli.Command {
 				return nil
 			}
 
-			buildPath := path.Join(repo, outDir, versionsDir, version, name)
-			build := sys.Cmd(fmt.Sprintf("go build -o %s", buildPath))
-			build.Dir = repo
-
-			sys.Catch(build.Run())
+			sys.StdCatchRun("tools build")
 			return nil
 		},
 	}
