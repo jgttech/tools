@@ -1,5 +1,5 @@
 # Used to configure the build and installation process.
-VERSION="1.0.11"
+VERSION="1.0.12"
 NAME="tools"
 PROFILE=".zshrc"
 OUT_DIR=".bin"
