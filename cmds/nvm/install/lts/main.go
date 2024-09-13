@@ -11,11 +11,26 @@ func Command() *cli.Command {
 	return &cli.Command{
 		Name: "lts",
 		Action: func(ctx context.Context, cmd *cli.Command) error {
-			sys.StdRun("nvm install --lts")
-			sys.StdRun("nvm use --lts --default")
-			sys.StdRun("npm i -g npm")
-			sys.StdRun("npm i -g yarn")
-			sys.StdRun("npm i -g pnpm")
+			commands := []string{
+				"npm --version",
+				"yarn --version",
+				"pnpm --version",
+
+				"nvm install --lts",
+				"nvm use --lts --default",
+				"npm i -g npm",
+				"npm i -g yarn",
+				"npm i -g pnpm",
+
+				"npm --version",
+				"yarn --version",
+				"pnpm --version",
+			}
+
+			for _, cmd := range commands {
+				sys.StdRun(cmd)
+			}
+
 			return nil
 		},
 	}
